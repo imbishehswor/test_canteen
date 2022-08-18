@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+  
+    <link rel="stylesheet" href="{% static 'css/style2.css'%}">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="title">OTP VERIFICATION</div>
+      <form action="#" method="post">
+        {% csrf_token %}
+        <medium> code has been send to ******apexcollege.edu.np </meduim>
+    <div>
+      
+    </div>
+        <div class="field">
+          <input type="number" required name="otp">
+          <label>OTP Code</label>
+        </div>
+        
+        <div class="field">
+          <input type="submit" value="Verify">
+        </div>
+       
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>varify</title>
+</head>
+<body>
+    <form action="otp">
+        {% block content%}
+        <h5>Dear {{name}},</h5> <br> <p> We are sent a varification otp code on your {{email}} </p>
+
+        {% endblock %}
+
+        <input type="submit" value="opt varify">
+    </form>
+</body>
+</html> {% endcomment %}
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+  
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+  </head>
+  <body>
+    {% block content%}
+    <div class="wrapper">
+      <div class="title">OTP VERIFICATION</div>
+
+      <form action="otp">
+        <medium>Dear {{name}} , your OTP code has been send to {{email}} </meduim>
+    <div>
+      
+    </div>
+        <div class="field">
+          
+          <label>OTP Code</label>
+        </div>
+        
+        <div class="field">
+          <input type="submit" value="Verify">
+        </div>
+       
+      </form>
+    </div>
+    {%endblock%}
+  </body>
+</html>

@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="{% static 'css/nuserStyle.css'%}">
+    <link rel="stylesheet" href="{% static 'css/profile.css'%}">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/editproduct.css'%}"> {% endcomment %}
+
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        
+        .container1 {
+            text-align: center;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 100%;
+            margin-left: 100px;
+            margin-right: 100px;
+            
+            }
+            .imgcontainainer{
+              text-align: center;
+              
+            }
+            img.avater{
+                width: 20%;
+                border-radius: 50%;
+            }
+           
+            .imgcontainainer .row .text{
+              text-align: center;
+            }
+            .container1 .row .text{
+              margin-left: 37%;
+              padding-top: 12px;
+            }
+
+        
+      </style>
+    </head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      
+      <a href="http://127.0.0.1:8000/products/menu">
+        <span class="logo_name style=">CMS</span>
+        </a>
+    </div>
+      <ul class="nav-links">
+        <!-- <li>
+          <a href="#" class="active">
+            <i class='bx bx-grid-alt' ></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+ -->        
+ <li>
+  <a href="http://127.0.0.1:8000/accounts/profile/{{request.session.user_id}}">
+  <i class='bx bxs-user-badge'></i>
+  <span class="links_name">Profile</span>
+  </a>
+</li>
+        <li>
+          <a href="http://127.0.0.1:8000/products/menu">
+            <i class='bx bx-food-menu'></i>
+            <span class="links_name">Menu</span>
+          </a>
+        </li>
+        <li>
+          <a href="http://127.0.0.1:8000/accounts/history/{{request.session.user_id}}">
+          <i class='bx bx-history' ></i>
+          <span class="links_name">History</span>
+          </a>
+       </li>
+        
+      
+        <!-- <li>
+          <a href="order.html">
+            <i class='bx bx-book-alt' ></i>
+            <span class="links_name">Order</span>
+          </a>
+        </li> -->
+        <li>
+          <a href="http://127.0.0.1:8000/accounts/changePassword/{{request.session.user_id}}">
+          <i class='bx bxs-key'></i>
+          <span class="links_name">Change Password</span>
+          </a>
+       </li>
+       <li>
+        <a href="http://127.0.0.1:8000/order/coformOrder">
+        <i class='bx bx-cart'></i>
+        <span class="links_name">Cart</span>
+        </a>
+     </li>
+       <li>
+        <a href="http://127.0.0.1:8000/order/finalQRcode/{{request.session.user_id}}">
+          <i class='bx bxs-barcode'></i>
+        <span class="links_name">Order QR</span>
+        </a>
+              
+    
+        <li class="log_out">
+          <a href="{% url 'logout' %}">
+          <i class='bx bx-log-out'></i>
+          <span class="links_name">Log out</span>
+          </a>
+       </li>
+      </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Dashboard</span>
+      </div>
+     
+      <div class="profile-details">
+        <img src="{% static 'image/profile.png'%}" alt="">
+        <span class="admin_name">{{request.session.user_fullname}}</span>
+        {% comment %} <i class='bx bx-chevron-down' ></i> {% endcomment %}
+       
+      </div>
+    </nav>
+
+    <div class="home-content">
+
+      <div class="sales-boxes">
+        <div class="recent-sales box">
+          <div class="title">Profile</div>
+          <div class="sales-details">
+            
+            <div class="container1">
+                <div class="imgcontainainer">
+                  <img src="{% static 'image/profile.png'%} " alt="profile" class="avater">
+
+                  
+                </div>
+                
+                  <div class="row" style="text-align:center ;">
+                    <div class="text" >
+                       Name : {{request.session.user_fullname}}
+                    </div>
+                    
+                  </div>
+                  <div class="row">
+                    <div class="text">
+                     Email : {{request.session.user_email}}
+                    </div>
+                    
+                  </div>
+                  <div class="row">
+                    <div class="text">
+                    Phone Number : {{request.session.user_phone}}
+                    </div>
+                    
+                  </div>
+                  
+                  
+                  
+                
+              </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+   let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+ </script>
+
+</body>
+</html>
+

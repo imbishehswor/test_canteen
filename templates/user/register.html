@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Signup now</title>
+      <link  rel ="icon" href ="{% static 'image/logo.jpg'%}">
+
+      <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+   </head>
+   <body>
+      <div class="bg-img">
+         <div class="content" style="width: 430px;">
+            <header>Sign Up</header>
+            {% if messages %} {% for message in messages %} {{message}} {% endfor %} {% endif %}
+
+            <form action="signupVarification" onsubmit="return validateForm()"  method = "POST" name = "form" >
+                {% csrf_token %}
+                 {% comment %} onsubmit="return validateForm() {% endcomment %}
+               <div class="field">
+                  <span class="fa fa-user"></span>
+                  <input type="text" name ="user_fullname"  placeholder="Name">
+               </div>
+               <div class="field space">
+                  <span class="fas fa-envelope"></span>
+                  <input type="text" name="user_email"  placeholder="Apex mail ">
+               </div>
+               <div class="field space">
+                  <span class="fas fa-phone-alt"></span>
+                  <input type="number" name="user_phone" maxlength="10" placeholder="Phone">
+               </div>
+               <div class="field space">
+                  <span class="fa fa-lock"></span>
+                  <input type="password" name="user_password1" class="pass-key"  placeholder="Password">
+                  <span class="show">SHOW</span>
+               </div>
+                  <div class="field space">
+                  <span class="fa fa-lock"></span>
+                  <input type="password" name="user_password2" class="pass-key"  placeholder="Confirm Password">
+                  <span class="show">SHOW</span>
+               </div>
+               
+               <div class="field space">
+                  <input type="submit" value="Register">
+               </div>
+            </form>  
+               
+           <div class="signup">
+               Already have Account?
+               <a href="http://127.0.0.1:8000/accounts/login">Login Now</a>
+            </div>
+         </div>
+     
+      <script>
+         const pass_field = document.querySelector('.pass-key');
+         const showBtn = document.querySelector('.show');
+         showBtn.addEventListener('click', function(){
+          if(pass_field.type === "password"){
+            pass_field.type = "text";
+            showBtn.textContent = "HIDE";
+            showBtn.style.color = "#3498db";
+          }else{
+            pass_field.type = "password";
+            showBtn.textContent = "SHOW";
+            showBtn.style.color = "#222";
+          }
+         });
+
+         function validateForm(){
+
+            var name = document.forms['form']['user_fullname'].value;
+            var email = document.forms['form']['user_email'].value;
+            var phone = document.forms['form']['user_phone'].value;
+            var pass1 = document.forms['form']['user_password1'].value;
+            var pass2 = document.forms['form']['user_password2'].value;
+            
+            var n = email.indexOf('@');
+            // console.log(n);
+            var apex = email.slice(n,n+19);
+            console.log(apex);
+
+            if (name == "") {
+
+               alert("Name must be filled out");
+            return false;
+         } else if(!isNaN(name)){
+            alert("Name must be character");
+            return false;
+         
+
+          } else if(email == ""){
+            alert("Email must be filled out");
+            return false;
+         } else if(apex != "@apexcollege.edu.np"){
+
+            alert("Email must be apex");
+            return false;
+
+          } else if(phone == ""){
+            alert("Phone must be filled");
+            return false;
+         } else if (phone.length!=10) {
+            alert("number should be 10");
+            return false;
+         } 
+          else if(pass1 == ""){
+            alert("pssword must be filled");
+            return false;
+         }else if(pass2 == ""){
+            alert("re password must be filled");
+            return false;
+         } else if(pass1 != pass2){
+            alert("password must be same");
+         }
+
+         
+
+       }
+      </script>
+   </body>
+</html>

@@ -1,0 +1,189 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    
+    {% comment %} <link rel="stylesheet" href="{% static 'css/dashboard.css'%}"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/nuserStyle.css'%}">
+
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+    <link rel="stylesheet" href="{% static 'css/  profile.css'%}">
+
+    <!-- <link rel="stylesheet" href="qr.css"> -->
+    <style>
+            
+              .container{
+                  
+                  margin-left:350px;
+                  margin-top:-45px
+                
+                
+              }
+              svg{
+                height:100%;
+                width:90%;
+                object-fit:cover;
+                
+              }
+              
+              .qrcode{
+                width:90%;
+                object-fit:cover;    
+              }
+              
+
+              @media (max-width:1240px) {
+                  .container{
+                    
+                      width: 34%;
+
+                      
+                    
+                  }
+                  .qrcode{
+                      box-shadow: 0 3px 10px #dfdfdf;
+                      border-radius: 20px;
+                  }
+              }
+
+              @media (max-width:800px) {
+                  .container{
+                      margin: auto;
+                      width: 45%;
+                    
+                  }
+                  .qrcode{
+                      box-shadow: 0 3px 10px #dfdfdf;
+                  border-radius: 20px;
+                  }
+              }
+
+
+              @media (max-width: 550px) {
+                  .container{
+                      margin: auto;
+                      width: 90%;
+                  }
+                  .qrcode{
+                      box-shadow: 0 3px 10px #dfdfdf;
+                  border-radius: 20px;
+                      
+                  }
+
+              }
+
+              @media (max-width: 400px) {
+                  .container{
+                      margin: auto;
+                      width: 80%;
+                  }
+                  .qrcode{
+                      box-shadow: 0 3px 10px #dfdfdf;
+                  border-radius: 20px;
+                      
+                  }
+
+              }
+    </style>
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      
+      <a href="http://127.0.0.1:8000/products/menu">
+        <span class="logo_name style=">CMS</span>
+        </a>
+    </div>
+      <ul class="nav-links">
+              
+ <li>
+  <a href="http://127.0.0.1:8000/accounts/profile/{{user.id}}">
+  <i class='bx bxs-user-badge'></i>
+  <span class="links_name">Profile</span>
+  </a>
+</li>
+<li>
+  <a href="http://127.0.0.1:8000/products/menu">
+  <i class='bx bx-food-menu'></i>
+  <span class="links_name">Menu</span>
+  </a>
+</li>
+<li>
+  <a href="http://127.0.0.1:8000/accounts/history/{{request.session.user_id}}">
+  <i class='bx bx-history' ></i>
+  <span class="links_name">History</span>
+  </a>
+</li>
+
+<li>
+  <a href="http://127.0.0.1:8000/accounts/changePassword/{{request.session.user_id}}">
+  <i class='bx bxs-key'></i>
+  <span class="links_name">Change Password</span>
+  </a>
+</li>
+<li>
+ <a href="http://127.0.0.1:8000/order/coformOrder">
+ <i class='bx bx-cart'></i>
+ <span class="links_name">Cart</span>
+ </a>
+</li>
+<li>
+<a href="http://127.0.0.1:8000/order/finalQRcode/{{request.session.user_id}}">
+<i class='bx bxs-barcode'></i>
+<span class="links_name">Order QR</span>
+</a>
+</li>
+<li class="log_out">
+  <a href="{% url 'logout' %}">
+  <i class='bx bx-log-out'></i>
+  <span class="links_name">Log out</span>
+  </a>
+</li>
+      </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Dashboard</span>
+      </div>
+     
+      <div class="profile-details">
+        <img src="{% static 'image/profile.png'%}" alt="">
+        <span class="admin_name">{{request.session.user_fullname}}</span>
+        {% comment %} <i class='bx bx-chevron-down' ></i> {% endcomment %}
+       
+      </div>
+    </nav>
+      <div class="home-content">
+            <div class="container">
+                <div class="qrcode" height=200px width=200px  >
+                  {% comment %} <img src="{{ svg|safe }}" alt="">  {% endcomment %}
+                  {{ svg|safe }}
+                </div>
+              </div> 
+        </div>
+
+  </section>
+
+  <script>
+   let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+ </script>
+
+</body>
+</html>
+

@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="{% static 'css/nuserStyle.css'%}">
+    <link rel="stylesheet" href="{% static 'css/  profile.css'%}">
+    <link rel="stylesheet" href="{% static 'css/editproduct.css'%}">
+
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   <style>
+    input[type=number]{
+      width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    }
+   </style>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      
+      <a href="http://127.0.0.1:8000/accounts/accounts-orderList" style="text-decoration:none;">
+        <span class="logo_name">CMS</span>
+        </a>
+    </div>
+      <ul class="nav-links">
+        <!-- <li>
+          <a href="#" class="active">
+            <i class='bx bx-grid-alt' ></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+ -->        
+ <li>
+    <a href="http://127.0.0.1:8000/products/viewProduct">
+      <i class='bx bx-box'></i>
+      <span class="links_name">Product</span>
+    </a>
+  </li>
+  <li>
+    <a href="http://127.0.0.1:8000/products/addProducts">
+      <i class='bx bx-box'></i>
+      <span class="links_name" >Add Product</span>
+    </a>
+  </li>
+  <li>
+    <a href="http://127.0.0.1:8000/products/dailyUpdate">
+      <i class='bx bx-edit' ></i>
+      <span class="links_name">Daily Update</span>
+    </a>
+  </li>
+  <li>
+    <a href="{% url 'orderlist' %}">
+      <i class='bx bx-list-ul' ></i>
+      <span class="links_name">Order list</span>
+    </a>
+  </li>
+  
+
+  <li>
+    <a href="http://127.0.0.1:8000/accounts/users">
+      <i class='bx bxs-user' ></i>
+      <span class="links_name">Users</span>
+    </a>
+  </li>
+  <li>
+    <a href="http://127.0.0.1:8000/accounts/changePasswordAdmin/{{request.session.user_id}}">
+      <i class='bx bxs-key' ></i>
+      <span class="links_name">Change Password</span>
+    </a>
+  </li>
+  <li>
+    <a href="http://127.0.0.1:8000/accounts/addUser">
+      <i class='bx bxs-user' ></i>
+      <span class= "links_name" >Add user</span>
+    </a>
+  </li>
+    
+        <li class="log_out">
+          <a href="http://127.0.0.1:8000/accounts/logout">
+            <i class='bx bx-log-out'></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Dashboard</span>
+      </div>
+     
+      <div class="profile-details">
+        {% comment %} <img src="" alt=""> {% endcomment %}
+        <span class="admin_name">{{request.session.user_fullname}}</span>
+        {% comment %} <i class='bx bx-chevron-down' ></i> {% endcomment %}
+       
+      </div>
+    </nav>
+
+    <div class="home-content">
+
+      <div class="sales-boxes">
+        <div class="recent-sales box">
+          <div class="title">Edit Profile</div>
+          <div class="sales-details">
+            
+            <div class="container">
+                <form action="http://127.0.0.1:8000/accounts/finalEdituser/{{user.id}}" method = "POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="text">
+                        Name :
+                        </div>
+                        <div class="field">
+                          <input type="text" id="" name="user_fullname" value={{user.user_fullname}} required>
+                        </div>
+                      </div>
+                  <div class="row">
+                    <div class="text">
+                     Phone :
+                    </div>
+                    <div class="field">
+                      <input type="number" id="" name="user_phone" value = "{{user.user_phone}}" required>
+                    </div>
+                  </div>
+                  
+                  
+                  <br>
+                  <div class="row">
+                    <input type="submit" value="Update" style="border-radius: 12px;">
+                   </div> 
+                </form>
+              </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+   let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+ </script>
+
+</body>
+</html>
+
